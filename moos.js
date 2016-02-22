@@ -94,7 +94,37 @@
     },
     bindEvents: function(){
       document.querySelector('.add-new-jar').addEventListener('click',this.addNewClick.bind(this));
+
+      //kuulan trükkimist otsikastis
+      document.querySelector('#search').addEventListener('keyup', this.search.bind(this));
     },
+
+    search: function(event){
+        //otsikasti väärtus
+        var needle = document.querySelector('#search').value;
+        console.log(needle);
+
+        var list = document.querySelectorAll('ul.list-of-jars li');
+        console.log(list);
+
+        for(var i = 0; i < list.length; i++){
+
+          var li = list[i];
+
+          //ühe listitemi sisu
+          var stack = li.querySelector('.content').innerHTML.toLowercase();
+
+          //kas otsisõna on sisus olemas
+          if(stack.indexOf(needle) != -1){
+            //olemas
+            li.style.display = 'list-item';
+          }else{
+            //ei ole, index on -1
+            li.style.display = 'none';
+          }
+        }
+    },
+
     addNewClick: function(event){
       //console.log(event);
       var title = document.querySelector('.title').value;
